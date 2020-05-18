@@ -1,5 +1,20 @@
 package warriors;
+import java.util.ArrayList;
 
+
+/**
+* This is the Game engine
+* Contains of the informaiton about the current game
+* What is the player, the board, pointer to menu
+* The state/status of the game
+* The current the position
+* The function to execute according to the current state.
+* <p>
+* This should separated from any content related
+* to game.
+* <p>
+* Menu is related to java console and scanner. 
+*/
 public class Game {
 
 	public Game(Menu m, int size) {
@@ -7,9 +22,12 @@ public class Game {
 		menu = m;
 		game_status = game_status.START_GAME;
 		
-		//Position where the player start
-		playerPosition = 0;
+		//Position where the player start = -1
+		// Position 0 is the first case of the board game;
+		playerPosition = -1;
 		maxPosition = size;
+		boardGame = new ArrayList<Case>(maxPosition);
+		this.initBoard();
 		
 	}
 	
@@ -17,6 +35,7 @@ public class Game {
 	private Player player;
 	private int playerPosition;
 	private final int maxPosition;
+	private  ArrayList<Case> boardGame;
 	public Game_status game_status;
 	
 	public enum Game_status {
@@ -71,6 +90,7 @@ public class Game {
 	 */
 	private void createPlayer() {
 		String listOfChoice[] = { "Créer votre personnage", 
+								  " Utiliser un personnage autonmatique",
 									"Quitter le jeu"};
 		int choice = menu.askForMenuChoice(listOfChoice);
 		switch(choice) {
@@ -89,10 +109,15 @@ public class Game {
 				this.game_status = Game_status.END_GAME;
 			}
 						
-			System.out.println(player.toString());
+			menu.printLine(player.toString());
 			game_status = Game_status.MENU_GAME;
 			break;
 		case 2:
+			player = new Magician("Merlin");
+			menu.printLine(player.toString());
+			game_status = Game_status.MENU_GAME;
+			break;
+		case 3:
 			this.game_status = Game_status.END_GAME;
 			break;
 			
@@ -154,20 +179,40 @@ public class Game {
 	
 	private void playGame() {
 		menu.printLineH2("Nouveau tour de jeu");
-		menu.printLine("Votre position actuelle est : "+playerPosition);
+		if(this.playerPosition<0) {
+			menu.printLine("Vous êtes sur la case départ");
+		}else {
+			menu.printLine("Votre position actuelle est : "+(playerPosition+1)+" / "+this.boardGame.size() ); 
+		}
+		
 		int diceResult = this.virtualDice();
-		this.setPosition(playerPosition+diceResult);
+		boolean endOfGame = this.setPosition(playerPosition+diceResult);
+		
+		if(this.playerPosition<0) {
+			menu.printLine("Vous êtes sur la case départ");
+		}else {
+			menu.printLine("Votre nouvelle position est : "+(playerPosition+1)+" / "+this.boardGame.size() ); 
+		}
+		
+		
+		if(!endOfGame) {
+			boardGame.get(this.playerPosition).interact(this.player);
+		}
+		
+		menu.printLine("Appuyer sur une touche pour continuer");
+		menu.askForEnter();
 	}
 	
 	private boolean setPosition(int p) {
 
+		
 		if(( p)< this.maxPosition) {
 			this.playerPosition = p;
-			return true;
+			return false;
 		}else {
 			menu.printLineH1("Bravo ! vous avez atteint la fin du niveau");
 			this.game_status = Game_status.END_GAME;
-			return false;
+			return true;
 		}
 		
 	}
@@ -177,8 +222,20 @@ public class Game {
 		menu.askForEnter();
 		int result = (int) (Math.random() * 6 + 1);
 		menu.printLine("Le resultat est : "+result);
-		return result;
+		//------- Fake dice -----
+		//Dé pipé
+		//return result;
+		return 1;
 		
+		
+	}
+	
+	private void initBoard() {
+		boardGame.add(new EmptyCase() );
+		boardGame.add(new Ennemy("Dindon enragé", 2, 2));
+		boardGame.add(new Weapon("dé à coudre", 2));
+		boardGame.add(new Bonus("Jus de gingembre"));
+				
 	}
 	
 }

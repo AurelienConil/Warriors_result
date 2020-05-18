@@ -1,6 +1,6 @@
 package warriors;
 
-public class Weapon {
+public class Weapon extends Case {
 
 	public Weapon( String _name, int _force) {
 		
@@ -36,6 +36,12 @@ public class Weapon {
 	
 	public String toString() {
 		return this.name+" | Force="+this.force;
+	}
+	
+	@Override
+	public void interact(Player p) {
+		System.out.println("Vous venez de rencontrer :"+this.toString());
+		
 	}
 	
 }
