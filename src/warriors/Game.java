@@ -1,5 +1,4 @@
 package warriors;
-
 import warriors.Player.Player_type;
 
 public class Game {
@@ -43,7 +42,7 @@ public class Game {
 				editPlayer();
 			break;
 			case END_GAME:
-				System.out.println("*** A très bientot sur Warriors ***");
+				menu.printLineH1("A très bientot sur Warriors ");
 			break;
 		
 		}
@@ -58,17 +57,35 @@ public class Game {
 	 * 
 	 */
 	private void createPlayer() {
-		System.out.println("création du personnage");
-		player= new Player(menu.askForName() , menu.askForType() );
-		System.out.println(player.toString());
-		game_status = Game_status.MENU_GAME;
+		String listOfChoice[] = { "Créer votre personnage", 
+									"Quitter le jeu"};
+		int choice = menu.askForMenuChoice(listOfChoice);
+		switch(choice) {
+		
+		case 1 :
+			menu.printLine("Création du personnage");
+			menu.printLine("Entrer votre nom :");
+			String name = menu.askForString(2);
+			Player_type type = menu.askForType();
+			player= new Player(name , type  );
+			System.out.println(player.toString());
+			game_status = Game_status.MENU_GAME;
+			break;
+		case 2:
+			this.game_status = Game_status.END_GAME;
+			break;
+			
+		}
+		
+		
 		
 	}
 	
 	private void editPlayer() {
 		System.out.println("*** Edition de votre personage ***");
 		System.out.println("Votre nom actuel est : "+player.getName());
-		player.setName(menu.askForName());
+		System.out.println("Rentrer votre nouveau nom");
+		player.setName(menu.askForString(2));
 		System.out.println("Votre nouveau nom est : "+player.getName());
 		System.out.println("Votre type actuel est :"+player.getTypeToString(player.getType()));
 		Player_type newType = menu.askForType();
@@ -79,15 +96,20 @@ public class Game {
 		System.out.println("Votre nouvele vie est : "+player.getLife());
 		System.out.println("Votre attaque actuelle est : "+player.getAttack());
 		System.out.println(" Taper votre nouvelle attaque");
-		player.setLife(menu.askForInt(player.minAttack, player.maxAttack));
+		player.setAttack(menu.askForInt(player.minAttack, player.maxAttack));
 		System.out.println("Votre nouvelle attaque est : "+player.getAttack());
 		
 		
 	}
 	
 	private void menuGame() {
-		// Affiche un menu à 3 choix . Afficher le personnage, Editer le personnnage, Quitter
-		int choice = menu.askForMenuGame();
+
+		menu.printLineH1("menu principal");
+		String listOfChoice[] = { "Afficher les informations du personnage",
+									"Editer le personnage", 
+									"Quitter le jeu"};
+		
+		int choice = menu.askForMenuChoice(listOfChoice);
 		switch(choice) {
 			
 		case 1:

@@ -22,12 +22,13 @@ public class Player {
 	public Player(String _name, Player_type _type ) {
 		name = _name;
 		player_type = _type;
-		life = (int) (Math.random() * 7 + 1);
-		attack = (int) (Math.random() * 7 + 1);
-		minAttack= 6;
-		maxAttack = 15;
+		life = (int) (Math.random() * 4 + 6);
+		attack = (int) (Math.random() * 9 + 6);
 		minLife = 6;
 		maxLife = 10;
+		minAttack= 6;
+		maxAttack = 15;
+		
 		
 	}
 	
@@ -113,7 +114,7 @@ public class Player {
 				this.attack = this.maxAttack;
 			}
 		}else {
-			this.attack = maxAttack;
+			this.attack = minAttack;
 		}
 	}
 	

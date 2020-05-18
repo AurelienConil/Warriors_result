@@ -9,7 +9,7 @@ public class Main {
 		Menu menu = new Menu();
 		Game game = new Game(menu);
 		
-		System.out.println("***** Bienvenue sur le jeu WARRIORS *****");
+		menu.printLineH1(" Bienvenue sur le jeu WARRIORS ");
 		while(game.game_status != Game_status.END_GAME) {
 			
 			game.updateGame();
@@ -18,8 +18,8 @@ public class Main {
 			
 		}
 		
-		System.out.println("GAME OVER");
-		System.out.println("***** A bientot sur le jeu WARRIORS *****");
+		menu.printLineH2("GAME OVER");
+		menu.printLineH1("A bientot sur le jeu WARRIORS ");
 		
 	}
 
