@@ -91,6 +91,12 @@ public class Menu {
 		return userChoice;
 	}
 	
+	void askForEnter() {
+		if(this.scan.hasNextLine())
+			this.scan.nextLine();
+		this.scan.hasNextLine();
+	}
+	
 	void printLine(String s) {
 		System.out.println(s);
 	}
