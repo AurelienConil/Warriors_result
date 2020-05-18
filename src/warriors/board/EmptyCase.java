@@ -1,4 +1,5 @@
-package warriors;
+package warriors.board;
+import warriors.player.Player;
 
 public class EmptyCase extends Case  {
 	

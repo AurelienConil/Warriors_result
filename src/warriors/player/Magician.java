@@ -1,4 +1,4 @@
-package warriors;
+package warriors.player;
 
 public class Magician extends Player {
 		

@@ -1,6 +1,8 @@
-package warriors;
+package warriors.bonus;
+import warriors.player.Player;
+import warriors.board.Case;
 
-public class Bonus extends Case {
+public abstract class Bonus extends Case {
 	
 	public Bonus(String _name) {
 		this.name = _name;
@@ -14,10 +16,6 @@ public class Bonus extends Case {
 		return "Bonus : "+this.getName();
 	}
 	
-	@Override
-	public void interact(Player p) {
-		System.out.println("Vous venez de rencontrer : "+this.toString());
-		
-	}
+	
 	
 }

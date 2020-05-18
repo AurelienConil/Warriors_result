@@ -1,5 +1,11 @@
 package warriors;
 import java.util.ArrayList;
+import warriors.player.*;
+import warriors.weapon.*;
+import warriors.ennemy.*;
+import warriors.board.*;
+import warriors.bonus.*;
+
 
 
 /**
@@ -232,9 +238,16 @@ public class Game {
 	
 	private void initBoard() {
 		boardGame.add(new EmptyCase() );
-		boardGame.add(new Ennemy("Dindon enragé", 2, 2));
-		boardGame.add(new Weapon("dé à coudre", 2));
-		boardGame.add(new Bonus("Jus de gingembre"));
+		boardGame.add(new Wizard());
+		boardGame.add(new Gobelin());
+		boardGame.add(new Dragon());
+		boardGame.add(new Sword());
+		boardGame.add(new Club());
+		boardGame.add(new FireBall());
+		boardGame.add(new Lightning());
+		boardGame.add(new SmallPotion());
+		boardGame.add(new BigPotion());
+
 				
 	}
 	

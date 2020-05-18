@@ -1,4 +1,6 @@
-package warriors;
+package warriors.weapon;
+import warriors.player.Player;
+import warriors.board.Case;
 
 public class Weapon extends Case {
 

@@ -1,6 +1,6 @@
-package warriors;
+package warriors.player;
 
-import java.math.*;
+import warriors.weapon.Weapon;
 
 public abstract class Player {
 	
