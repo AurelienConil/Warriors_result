@@ -115,7 +115,7 @@ public class Game {
 		System.out.println("Votre nouvele vie est : "+player.getLife());
 		System.out.println("Votre attaque actuelle est : "+player.getAttack());
 		System.out.println(" Taper votre nouvelle attaque");
-		player.setAttack(menu.askForInt(player.minAttack, player.maxAttack));
+		player.setAttack(menu.askForInt(player.minAttack, player.MAX_ATTACK));
 		System.out.println("Votre nouvelle attaque est : "+player.getAttack());
 		
 	}

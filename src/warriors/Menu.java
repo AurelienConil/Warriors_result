@@ -1,6 +1,16 @@
 package warriors;
 import java.util.Scanner;
 
+/**
+* Menu aim to be separated from the game content
+* This just an interface tool, to display message
+* display menu, and ask information from the user.
+* <p>
+* This should separated from any content related
+* to game.
+* <p>
+* Menu is related to java console and scanner. 
+*/
 public class Menu {
 	
 	public Menu() {

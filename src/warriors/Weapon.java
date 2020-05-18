@@ -9,6 +9,12 @@ public class Weapon {
 		this.MAX_FORCE = 15;
 	}
 	
+	public Weapon() {
+		this.name = "-vide-";
+		this.force = 0;
+		this.MAX_FORCE = 15;
+	}
+	
 	private String name;
 	private int force;
 	private final int MAX_FORCE;
@@ -26,6 +32,10 @@ public class Weapon {
 		}else {
 			this.force = this.MAX_FORCE;
 		}
+	}
+	
+	public String toString() {
+		return this.name+" | Force="+this.force;
 	}
 	
 }
