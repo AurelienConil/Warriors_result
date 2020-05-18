@@ -11,6 +11,8 @@ public class SmallPotion extends Bonus{
 	@Override
 	public void interact(Player p) {
 		System.out.println("Vous venez de rencontrer : "+this.toString());
+		p.setLife(p.getLife() + 2);
+		System.out.println("Votre vie est désormais de :"+p.getLife());
 		
 	}
 }

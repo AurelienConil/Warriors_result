@@ -183,5 +183,11 @@ public abstract class Player {
 		
 	}
 	
+	public void setWeapon(Weapon w) {
+		if(w != null) {
+			this.weapon = w;
+		}
+	}
+	
 
 }

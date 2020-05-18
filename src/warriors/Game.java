@@ -23,7 +23,7 @@ import warriors.bonus.*;
 */
 public class Game {
 
-	public Game(Menu m, int size) {
+	public Game(Menu m, int size, boolean debug) {
 		
 		menu = m;
 		game_status = game_status.START_GAME;
@@ -31,9 +31,16 @@ public class Game {
 		//Position where the player start = -1
 		// Position 0 is the first case of the board game;
 		playerPosition = -1;
-		maxPosition = size;
-		boardGame = new ArrayList<Case>(maxPosition);
-		this.initBoard();
+		boardGame = new ArrayList<Case>();
+		if(debug) {
+			
+			this.initTestBoard();
+			maxPosition = this.boardGame.size();
+		}else {
+			this.initBoard();
+			maxPosition = size;
+		}
+
 		
 	}
 	
@@ -236,7 +243,7 @@ public class Game {
 		
 	}
 	
-	private void initBoard() {
+	private void initTestBoard() {
 		boardGame.add(new EmptyCase() );
 		boardGame.add(new Wizard());
 		boardGame.add(new Gobelin());
@@ -247,8 +254,12 @@ public class Game {
 		boardGame.add(new Lightning());
 		boardGame.add(new SmallPotion());
 		boardGame.add(new BigPotion());
-
-				
+			
+	}
+	
+	private void initBoard() {
+		
+			
 	}
 	
 }

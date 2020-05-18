@@ -48,5 +48,6 @@ public abstract class Ennemy extends Case {
 		System.out.println("Vous venez de rencontrer :"+this.toString());
 		
 	}
-	
 }
+	
+

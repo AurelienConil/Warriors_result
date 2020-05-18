@@ -42,7 +42,7 @@ public class Weapon extends Case {
 	
 	@Override
 	public void interact(Player p) {
-		System.out.println("Vous venez de rencontrer :"+this.toString());
+		System.out.println("Vous de rencontrer :"+this.toString());
 		
 	}
 	
