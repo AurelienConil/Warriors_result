@@ -14,8 +14,7 @@ public class Main {
 			
 			game.updateGame();
 			
-			
-			//game.game_status = Game_status.END_GAME;
+
 			
 		}
 		
