@@ -1,6 +1,5 @@
 package warriors;
 import java.util.Scanner;
-import warriors.Player.Player_type;
 
 public class Menu {
 	
@@ -11,33 +10,7 @@ public class Menu {
 	
 	Scanner scan;
 	
-	Player_type askForType() {
-		
-		int userChoice = 0;
-		
-		while(userChoice<1 || userChoice>2) {
-			this.printLine("Choisir un type de personnage");
-			System.out.println("(1) Magicien");
-			System.out.println("(2) Guerrier");
-			System.out.println("Taper votre choix ( 1 ou 2 )");
-			
-			if(this.scan.hasNextInt()) {
-				userChoice = this.scan.nextInt();
-			}else {
-				this.scan.next();
-			}
-			
-			
-		}
-		
-		if(userChoice==1) {
-			return Player_type.MAGICIEN;
-		}else {
-			return Player_type.GUERRIER;
-		}
-
-		
-	}
+	
 	
 	int askForInt(int min, int max) {
 		

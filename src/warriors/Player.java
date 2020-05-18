@@ -2,13 +2,13 @@ package warriors;
 
 import java.math.*;
 
-public class Player {
+public abstract class Player {
 	
 	
-	public Player() {
-		minAttack= 6;
+	public Player() {;
+		minAttack = 9;
 		maxAttack = 15;
-		minLife = 6;
+		minLife = 3;
 		maxLife = 10;
 	}
 	
@@ -19,30 +19,25 @@ public class Player {
 	 * @param String name , Player_type type
 	 * @return void
 	 */
-	public Player(String _name, Player_type _type ) {
-		name = _name;
-		player_type = _type;
-		life = (int) (Math.random() * 4 + 6);
-		attack = (int) (Math.random() * 9 + 6);
-		minLife = 6;
-		maxLife = 10;
-		minAttack= 6;
-		maxAttack = 15;
+	public Player(String _name, int _minLife, int _maxLife, int _minAttack, int _maxAttack ) {
+		this.name = _name;
 		
+		this.minLife = _minLife;
+		this.maxLife = _maxLife;
+		this.minAttack = _minAttack;
+		this.maxAttack = _maxAttack;
+		this.life = (int)( Math.random()*(this.maxLife-this.minLife) + this.minLife  );
+		this.attack = (int)(Math.random()*(this.maxAttack-this.minAttack) + this.minAttack);
 		
 	}
 	
 	private String name;
-	public Player_type player_type;
-	public enum Player_type {
-		MAGICIEN, GUERRIER
-	}
 	private int life;
-	public final int maxLife;
 	public final int minLife;
+	public final int maxLife;
 	private int attack;
-	public final int maxAttack;
 	public final int minAttack;
+	public final int maxAttack;
 	
 	/**
 	 * Return all information in one string
@@ -52,7 +47,7 @@ public class Player {
 	 * @return String 
 	 */
 	public String toString() {
-		return ("Personnage = "+this.name+" | type= Magicien | vie="+this.life+" | attack="+this.attack);
+		return ("Personnage = "+this.name+" | type="+this.getPlayerTypeToString()+" | vie="+this.life+" | attack="+this.attack);
 	}
 	
 	public String getName() {
@@ -63,8 +58,17 @@ public class Player {
 			this.name = _name;
 		}
 	}
-	public Player_type getType() {
-		return this.player_type;
+	
+	public String getPlayerTypeToString() {
+		if( this instanceof Magician) {
+			return "Magicien";
+		}
+		else if( this instanceof Warrior) {
+			return "Guerrier";
+		}
+		else {
+			return "UNDEFINED";
+		}
 	}
 	
 	
@@ -76,46 +80,33 @@ public class Player {
 	 * @param Player_type
 	 * @return String
 	 */
-	public String getTypeToString(Player_type type) {
-		if(type==Player_type.MAGICIEN) {
-			return "Magicien";
-		}else if(type==Player_type.GUERRIER) {
-			return "Guerrier";
-		}else {
-			return "";
-		}
-	}
-	public void setType(Player_type _type) {
-		this.player_type = _type;
-	}
+
+
 	public int getLife() {
 		return this.life;
 	}
+	
 	public void setLife(int l) {
-		if(l >= this.minLife) {
-			if(l<=this.maxLife) {
-				this.life = l;
-			}else {
-				this.life = maxLife;
-			}
-			
+
+		if(l<=this.maxLife) {
+			this.life = l;
 		}else {
-			this.life = minLife;
+			this.life = maxLife;
 		}
+			
 	}
+	
 	public int getAttack() {
 		return this.attack;
 	}
 	public void setAttack(int a) {
-		if(a >= this.minAttack) {
-			if(a <= this.maxAttack) {
-				this.attack = a;
-			}else {
-				this.attack = this.maxAttack;
-			}
+
+		if(a <= this.maxAttack) {
+			this.attack = a;
 		}else {
-			this.attack = minAttack;
+			this.attack = this.maxAttack;
 		}
+		
 	}
 	
 

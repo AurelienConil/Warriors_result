@@ -1,7 +1,4 @@
 package warriors;
-import java.util.Random;
-
-import warriors.Player.Player_type;
 
 public class Game {
 
@@ -50,6 +47,7 @@ public class Game {
 			break;
 			case EDIT_PLAYER:
 				editPlayer();
+				this.game_status = Game_status.MENU_GAME;
 			break;
 			case PLAYING_GAME:
 				playGame();
@@ -61,6 +59,8 @@ public class Game {
 		}
 		
 	}
+	
+	
 	
 	
 	/**
@@ -79,8 +79,16 @@ public class Game {
 			menu.printLine("Création du personnage");
 			menu.printLine("Entrer votre nom :");
 			String name = menu.askForString(2);
-			Player_type type = menu.askForType();
-			player= new Player(name , type  );
+			String listOfPlayerType[] = { "Magicien", "Guerrier"};
+			int choiceType = menu.askForMenuChoice(listOfPlayerType);
+			if(choiceType==1) {
+				player = new Magician(name);
+			}else if(choiceType ==2) {
+				player = new Warrior(name);
+			}else {
+				this.game_status = Game_status.END_GAME;
+			}
+						
 			System.out.println(player.toString());
 			game_status = Game_status.MENU_GAME;
 			break;
@@ -100,9 +108,7 @@ public class Game {
 		System.out.println("Rentrer votre nouveau nom");
 		player.setName(menu.askForString(2));
 		System.out.println("Votre nouveau nom est : "+player.getName());
-		System.out.println("Votre type actuel est :"+player.getTypeToString(player.getType()));
-		Player_type newType = menu.askForType();
-		player.setType( newType);
+		System.out.println("Votre type actuel est :"+"-- UNDEFINED --");
 		System.out.println("Votre vie actuelle est : "+player.getLife());
 		System.out.println(" Taper votre nouvelle vie");
 		player.setLife(menu.askForInt(player.minLife, player.maxLife));
@@ -111,7 +117,6 @@ public class Game {
 		System.out.println(" Taper votre nouvelle attaque");
 		player.setAttack(menu.askForInt(player.minAttack, player.maxAttack));
 		System.out.println("Votre nouvelle attaque est : "+player.getAttack());
-		
 		
 	}
 	
