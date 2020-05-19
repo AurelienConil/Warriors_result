@@ -83,7 +83,7 @@ public class Menu {
 			
 			this.printLine(" Selectionner un choix ");
 			for(int i=0; i<listOfChoice.length ; i++) {
-				System.out.println("("+(i+1)+") "+listOfChoice[i]);
+				System.out.println("("+(i+1)+") "+listOfChoice[i]+"");
 			}
 		
 			String userAnswer = this.scan.nextLine();

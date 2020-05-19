@@ -107,8 +107,8 @@ public class Game {
 	 * 
 	 */
 	private void createPlayer() {
-		String listOfChoice[] = { "Créer votre personnage", 
-								  " Utiliser un personnage automatique",
+		String listOfChoice[] = { 	"Créer votre personnage", 
+								  	"Utiliser un personnage automatique",
 									"Quitter le jeu"};
 		int choice = menu.askForMenuChoice(listOfChoice);
 		switch(choice) {
@@ -168,7 +168,7 @@ public class Game {
 		menu.printLineH1("menu principal");
 		String listOfChoice[] = { 	"Afficher les informations du personnage",
 									"Editer le personnage", 
-									" Comencer la partie",
+									"Comencer la partie",
 									"Quitter le jeu"};
 		
 		int choice = menu.askForMenuChoice(listOfChoice);
