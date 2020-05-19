@@ -210,7 +210,7 @@ public class Game {
 		}
 		
 		// ASK FOR ENTER -> next turn
-		menu.printLine("Appuyer sur une touche pour continuer ( q pour quitter , i pour informations )");
+		menu.printLine("Appuyer sur une touche pour continuer ( q pour quitter , i pour information )");
 		String result = menu.askForStringOrEnter();
 		if(result.contentEquals("q")) {
 			this.game_status = Game_status.END_GAME;
@@ -250,7 +250,7 @@ public class Game {
 				System.out.println("Array Size ="+this.boardGame.size()+"  player position="+this.playerPosition);
 			}
 		}else {
-			menu.printLineH1("Bravo ! vous avez atteint la fin du niveau");
+			menu.printLineH1("Bravo ! Vous avez atteint la fin du niveau");
 		}
 	}
 	
