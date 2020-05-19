@@ -6,11 +6,14 @@ public abstract class Player {
 	
 	
 	public Player() {;
-		minAttack = 9;
-		MAX_ATTACK = 15;
-		minLife = 3;
-		maxLife = 10;
-		weapon = new Weapon();
+		this.name = "Anonyme";
+		this.minAttack = 9;
+		this.MAX_ATTACK = 15;
+		this.minLife = 3;
+		this.maxLife = 10;
+		this.weapon = new Weapon();
+		this.isAlive = true;
+		
 	}
 	
 	/**
@@ -29,6 +32,7 @@ public abstract class Player {
 		this.MAX_ATTACK = _maxAttack;
 		this.life = (int)( Math.random()*(this.maxLife-this.minLife) + this.minLife  );
 		this.attack = (int)(Math.random()*(this.MAX_ATTACK-this.minAttack) + this.minAttack);
+		this.isAlive = true;
 		weapon = new Weapon();
 		
 	}
@@ -37,6 +41,8 @@ public abstract class Player {
 	private String name;
 	// Life lever until dying
 	private int life;
+	// Is alive of dead
+	private boolean isAlive;
 	// Minimum life when initialized
 	public final int minLife;
 	// Maximum life during all the game ( init + game )
@@ -120,6 +126,17 @@ public abstract class Player {
 		return this.life;
 	}
 	
+	/**
+	 * Getter from isAlive attribute
+	 * 
+	 *
+	 * @param void
+	 * @return int life level
+	 */
+	public boolean isAlive() {
+		return this.isAlive;
+	}
+	
 	
 	
 	/**
@@ -137,6 +154,22 @@ public abstract class Player {
 			this.life = maxLife;
 		}
 			
+	}
+	
+	/**
+	 * Decrease life
+	 * 
+	 *
+	 * @param int value to decrease life from
+	 * @return void
+	 */
+	public void reduceLife(int i) {
+		if(i<this.life) {
+			this.life -= i;
+		}else {
+			this.life=0;
+			this.isAlive = false;
+		}
 	}
 	
 	/**

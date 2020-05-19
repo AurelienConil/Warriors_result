@@ -29,7 +29,7 @@ public class Menu {
 		while(userChoice<(min) || userChoice>max) {
 			this.printLine("Taper votre choix ( entre "+min+" et "+max+" )");
 			if(this.scan.hasNextInt()) {
-				userChoice = this.scan.nextInt();
+				userChoice = Integer.parseInt(this.scan.nextLine());
 			}else {
 				this.scan.next();
 			}
@@ -43,8 +43,8 @@ public class Menu {
 	}
 	
 	
-	String askForString(int minLength) {
-		
+	public String askForString(int minLength) {
+		//Clear al previous lines
 		String userName = "";
 		while(userName.length()<minLength) {
 			userName = this.scan.nextLine();
@@ -53,7 +53,29 @@ public class Menu {
 		
 	}
 	
-	int askForMenuChoice(String listOfChoice[]) {
+	public String askForStringOrEnter() {
+		String readString = this.scan.nextLine();
+	    while(readString!=null) {
+
+	        if (readString.isEmpty()) {
+	        	break;
+	        }
+	        
+	        if( readString.length() > 0) {
+	        	break;
+	        }
+
+	        if (this.scan.hasNext()) {
+	            readString = this.scan.nextLine();
+	        } else {
+	            readString = null;
+	        }
+	    };
+	    return readString;
+		
+	}
+	
+	public int askForMenuChoice(String listOfChoice[]) {
 		
 		int userChoice = 0;
 		
@@ -64,34 +86,48 @@ public class Menu {
 				System.out.println("("+(i+1)+") "+listOfChoice[i]);
 			}
 		
-			if(this.scan.hasNextInt()) {
-				userChoice = this.scan.nextInt();
-			}else {
-				this.scan.next();
+			String userAnswer = this.scan.nextLine();
+			if(userAnswer.length()>0) {
+				userChoice = Integer.parseInt(userAnswer);
 			}
+			
 		
 		}
 		return userChoice;
 	}
 	
-	void askForEnter() {
-		if(this.scan.hasNextLine())
-			this.scan.nextLine();
-		this.scan.hasNextLine();
+	public void askForEnter() {
+		String readString = this.scan.nextLine();
+	    while(readString!=null) {
+
+	        if (readString.isEmpty()) {
+	        	break;
+	        }
+	        
+	        if( readString.length() > 0) {
+	        	break;
+	        }
+
+	        if (this.scan.hasNext()) {
+	            readString = this.scan.nextLine();
+	        } else {
+	            readString = null;
+	        }
+	    };
 	}
 	
-	void printLine(String s) {
+	public void printLine(String s) {
 		System.out.println(s);
 	}
 	
-	void printLineH1(String s) {
+	public void printLineH1(String s) {
 		System.out.println("******************************");
 		System.out.println(s.toUpperCase());
 		System.out.println("******************************");
 
 	}
 	
-	void printLineH2(String s) {
+	public void printLineH2(String s) {
 		System.out.println("*** "+s+" ****");
 	}
 

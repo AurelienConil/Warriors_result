@@ -8,7 +8,7 @@ public class Main {
 		
 		Menu menu = new Menu();
 		// Game ( Menu m, Size of Board, Debug Mode )
-		Game game = new Game(menu, 64, false);
+		Game game = new Game(menu, 64, true);
 		
 		menu.printLineH1(" Bienvenue sur le jeu WARRIORS ");
 		while(game.game_status != Game_status.END_GAME) {

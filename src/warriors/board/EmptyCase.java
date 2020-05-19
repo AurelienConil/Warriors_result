@@ -1,4 +1,5 @@
 package warriors.board;
+import warriors.Fight;
 import warriors.player.Player;
 
 public class EmptyCase implements Case  {
@@ -8,7 +9,7 @@ public class EmptyCase implements Case  {
 	}
 	
 	@Override
-	public void interact(Player p) {
+	public void interact(Player p, Fight f) {
 		System.out.println("Vous venez de rencontrer : "+this.toString());
 		
 	}

@@ -1,5 +1,6 @@
 package warriors.weapon;
 
+import warriors.Fight;
 import warriors.player.Player;
 import warriors.player.Warrior;
 
@@ -11,7 +12,7 @@ public class Sword extends Weapon {
 	
 	
 	@Override
-	public void interact(Player p) {
+	public void interact(Player p, Fight f) {
 		System.out.println("Vous venez de trouver :"+this.toString());
 		if(p instanceof Warrior) {
 			p.setWeapon(this);System.out.println("Vous force est desormais de : "+p.getFinalAttack() );

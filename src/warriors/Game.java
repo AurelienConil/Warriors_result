@@ -28,6 +28,7 @@ public class Game {
 		menu = m;
 		game_status = game_status.START_GAME;
 		gameDebug = debug;
+		fight = new Fight(this.menu);
 		
 		//Position where the player start = -1
 		// Position 0 is the first case of the board game;
@@ -53,6 +54,7 @@ public class Game {
 	private  ArrayList<Case> boardGame;
 	public Game_status game_status;
 	private boolean gameDebug;
+	private Fight fight;
 	
 	public enum Game_status {
 		START_GAME, MENU_GAME, EDIT_PLAYER, PLAYING_GAME,  END_GAME
@@ -196,6 +198,33 @@ public class Game {
 	private void playGame() {
 		//PRINTING STUFF
 		menu.printLineH2("Nouveau tour de jeu");
+		
+		if(this.fight.getIsCurrentFighting()) {
+			menu.printLine("Vous êtes en plein combat");
+			boolean stillFighting = this.fight.updateFight();
+			if(!stillFighting && !this.player.isAlive() ) {
+				this.game_status = Game_status.END_GAME;
+			}
+		}else {
+			this.moveToNextCase();
+		}
+		
+		// ASK FOR ENTER -> next turn
+		menu.printLine("Appuyer sur une touche pour continuer ( q pour quitter , i pour informations )");
+		String result = menu.askForStringOrEnter();
+		if(result.contentEquals("q")) {
+			this.game_status = Game_status.END_GAME;
+		}
+		else if(result.contentEquals("i")) {
+			this.menu.printLineH2("information joueur");
+			this.menu.printLine(this.player.toString());
+		}else {
+			int i=0;
+		}
+	}
+	
+	private void moveToNextCase() {
+		
 		if(this.playerPosition<0) {
 			menu.printLine("Vous êtes sur la case départ");
 		}else {
@@ -214,14 +243,15 @@ public class Game {
 		
 		// OUT OF BOARD ? = end of game
 		if(!endOfGame) {
-			boardGame.get(this.playerPosition).interact(this.player);
+			try {
+				boardGame.get(this.playerPosition).interact(this.player, this.fight);				
+			}catch( IndexOutOfBoundsException e) {
+				System.out.println(e.getMessage());
+				System.out.println("Array Size ="+this.boardGame.size()+"  player position="+this.playerPosition);
+			}
 		}else {
 			menu.printLineH1("Bravo ! vous avez atteint la fin du niveau");
 		}
-		
-		// ASK FOR ENTER -> next turn
-		menu.printLine("Appuyer sur une touche pour continuer");
-		menu.askForEnter();
 	}
 	
 	private boolean setPosition(int p) {

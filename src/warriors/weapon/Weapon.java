@@ -1,5 +1,6 @@
 package warriors.weapon;
 import warriors.player.Player;
+import warriors.Fight;
 import warriors.board.Case;
 
 public class Weapon implements Case {
@@ -41,7 +42,7 @@ public class Weapon implements Case {
 	}
 	
 	@Override
-	public void interact(Player p) {
+	public void interact(Player p, Fight f) {
 		System.out.println("Vous de rencontrer :"+this.toString());
 		
 	}
