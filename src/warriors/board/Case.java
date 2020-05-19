@@ -1,8 +1,8 @@
 package warriors.board;
 import warriors.player.Player;
 
-public abstract class Case {
+public interface Case {
 
-	public abstract void interact(Player p);
+	public void interact(Player p);
 	
 }

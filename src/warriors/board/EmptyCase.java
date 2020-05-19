@@ -1,7 +1,7 @@
 package warriors.board;
 import warriors.player.Player;
 
-public class EmptyCase extends Case  {
+public class EmptyCase implements Case  {
 	
 	public String toString() {
 		return "Une case vide";

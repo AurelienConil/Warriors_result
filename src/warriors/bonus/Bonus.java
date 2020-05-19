@@ -2,7 +2,7 @@ package warriors.bonus;
 import warriors.player.Player;
 import warriors.board.Case;
 
-public abstract class Bonus extends Case {
+public abstract class Bonus implements Case {
 	
 	public Bonus(String _name) {
 		this.name = _name;

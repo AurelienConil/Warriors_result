@@ -2,7 +2,7 @@ package warriors.ennemy;
 import warriors.player.Player;
 import warriors.board.Case;
 
-public abstract class Ennemy extends Case {
+public abstract class Ennemy implements Case {
 
 	public Ennemy() {
 		this.name = "Gros Mechant";

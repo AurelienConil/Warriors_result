@@ -2,7 +2,7 @@ package warriors.weapon;
 import warriors.player.Player;
 import warriors.board.Case;
 
-public class Weapon extends Case {
+public class Weapon implements Case {
 
 	public Weapon( String _name, int _force) {
 		

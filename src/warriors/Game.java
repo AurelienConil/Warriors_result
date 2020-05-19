@@ -194,6 +194,7 @@ public class Game {
 	}
 	
 	private void playGame() {
+		//PRINTING STUFF
 		menu.printLineH2("Nouveau tour de jeu");
 		if(this.playerPosition<0) {
 			menu.printLine("Vous êtes sur la case départ");
@@ -201,6 +202,7 @@ public class Game {
 			menu.printLine("Votre position actuelle est : "+(playerPosition)+" / "+this.boardGame.size() ); 
 		}
 		
+		// DICE AND SET POSITION
 		int diceResult = this.virtualDice();
 		boolean endOfGame = this.setPosition(playerPosition+diceResult);
 		
@@ -210,11 +212,14 @@ public class Game {
 			menu.printLine("Votre nouvelle position est : "+(playerPosition)+" / "+this.boardGame.size() ); 
 		}
 		
-		
+		// OUT OF BOARD ? = end of game
 		if(!endOfGame) {
 			boardGame.get(this.playerPosition).interact(this.player);
+		}else {
+			menu.printLineH1("Bravo ! vous avez atteint la fin du niveau");
 		}
 		
+		// ASK FOR ENTER -> next turn
 		menu.printLine("Appuyer sur une touche pour continuer");
 		menu.askForEnter();
 	}
@@ -226,7 +231,6 @@ public class Game {
 			this.playerPosition = p;
 			return false;
 		}else {
-			menu.printLineH1("Bravo ! vous avez atteint la fin du niveau");
 			this.game_status = Game_status.END_GAME;
 			return true;
 		}
