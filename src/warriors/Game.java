@@ -27,18 +27,20 @@ public class Game {
 		
 		menu = m;
 		game_status = game_status.START_GAME;
+		gameDebug = debug;
 		
 		//Position where the player start = -1
 		// Position 0 is the first case of the board game;
 		playerPosition = -1;
 		boardGame = new ArrayList<Case>();
-		if(debug) {
+		if(this.gameDebug) {
 			
 			this.initTestBoard();
 			maxPosition = this.boardGame.size();
 		}else {
-			this.initBoard();
 			maxPosition = size;
+			this.initBoard();
+			
 		}
 
 		
@@ -50,6 +52,7 @@ public class Game {
 	private final int maxPosition;
 	private  ArrayList<Case> boardGame;
 	public Game_status game_status;
+	private boolean gameDebug;
 	
 	public enum Game_status {
 		START_GAME, MENU_GAME, EDIT_PLAYER, PLAYING_GAME,  END_GAME
@@ -103,7 +106,7 @@ public class Game {
 	 */
 	private void createPlayer() {
 		String listOfChoice[] = { "Créer votre personnage", 
-								  " Utiliser un personnage autonmatique",
+								  " Utiliser un personnage automatique",
 									"Quitter le jeu"};
 		int choice = menu.askForMenuChoice(listOfChoice);
 		switch(choice) {
@@ -195,7 +198,7 @@ public class Game {
 		if(this.playerPosition<0) {
 			menu.printLine("Vous êtes sur la case départ");
 		}else {
-			menu.printLine("Votre position actuelle est : "+(playerPosition+1)+" / "+this.boardGame.size() ); 
+			menu.printLine("Votre position actuelle est : "+(playerPosition)+" / "+this.boardGame.size() ); 
 		}
 		
 		int diceResult = this.virtualDice();
@@ -204,7 +207,7 @@ public class Game {
 		if(this.playerPosition<0) {
 			menu.printLine("Vous êtes sur la case départ");
 		}else {
-			menu.printLine("Votre nouvelle position est : "+(playerPosition+1)+" / "+this.boardGame.size() ); 
+			menu.printLine("Votre nouvelle position est : "+(playerPosition)+" / "+this.boardGame.size() ); 
 		}
 		
 		
@@ -234,11 +237,16 @@ public class Game {
 		menu.printLine("Appuyer sur entrée pour lancer le dé");
 		menu.askForEnter();
 		int result = (int) (Math.random() * 6 + 1);
-		menu.printLine("Le resultat est : "+result);
-		//------- Fake dice -----
-		//Dé pipé
-		//return result;
-		return 1;
+		
+		if(this.gameDebug) {
+			//Fake Dice that return always 1
+			menu.printLine("Le dé est pippé : 1");
+			return 1;
+
+		}else {
+			menu.printLine("Le resultat est : "+result);
+			return result;
+		}
 		
 		
 	}
@@ -258,8 +266,69 @@ public class Game {
 	}
 	
 	private void initBoard() {
+		this.boardGame.clear();
 		
+		//EMPTY CASE
+		for(int i=0; i<this.maxPosition; i++) {
+			this.boardGame.add(new EmptyCase());
+		}
+		// DRAGON
+		int[] dragonList = {45,52,56,62};
+		for(int i : dragonList) {
+			this.boardGame.set(i, new Dragon());
+		}
+		// WIZARD
+		int[] wizardList = {10,20,25,32,35,36,37,40,44,47};
+		for(int i : wizardList) {
+			this.boardGame.set(i, new Wizard() );
+		}
+		// Gobelin
+		int[] gobelinList = {45,52,56,62};
+		for(int i : gobelinList) {
+			this.boardGame.set(i, new Gobelin() );
+		}
+		// Massue Club
+		int[] clubList = {2,11,5,22,38};
+		for(int i : clubList) {
+			this.boardGame.set(i, new Club() );
+		}
+		// Epee Sword
+		int[] swordList = {19,26,42,53};
+		for(int i : swordList) {
+			this.boardGame.set(i, new Sword()  );
+		}
+		//Lightning
+		int[] lightningList = {1,4,8,17,23};
+		for(int i : lightningList) {
+			this.boardGame.set(i, new Lightning() );
+		}
+		// Boule de feu : fireball
+		int[] fireballList = {48,49};
+		for(int i :fireballList) {
+			this.boardGame.set(i, new FireBall()  );
+		}
+		// Potion standard/petite : smallPotion
+		int[] smallPotionList = {7,13,31,33,39,43};
+		for(int i : smallPotionList) {
+			this.boardGame.set(i, new SmallPotion() );
+		}
+		// Big Potion
+		int[] bigPotionList = {28,41};
+		for(int i : bigPotionList) {
+			this.boardGame.set(i, new BigPotion() );
+		}
 			
+	}
+	
+	private void initRandomBoard() {
+		this.boardGame.clear();
+		//EMPTY CASE
+		for(int i=0; i<this.maxPosition; i++) {
+			this.boardGame.add(new EmptyCase());
+		}
+		//NEED TO DO IT
+		
+		
 	}
 	
 }
