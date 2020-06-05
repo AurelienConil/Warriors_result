@@ -1,11 +1,20 @@
 package warriors.player;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+
+import javax.swing.JPanel;
 import warriors.weapon.Weapon;
 
-public abstract class Player {
+public abstract class Player extends JPanel {
 	
 	
-	public Player() {;
+	public Player() {
+		super();
 		this.name = "Anonyme";
 		this.minAttack = 9;
 		this.MAX_ATTACK = 15;
@@ -13,6 +22,8 @@ public abstract class Player {
 		this.maxLife = 10;
 		this.weapon = new Weapon();
 		this.isAlive = true;
+		initUI();
+		
 		
 	}
 	
@@ -24,8 +35,8 @@ public abstract class Player {
 	 * @return void
 	 */
 	public Player(String _name, int _minLife, int _maxLife, int _minAttack, int _maxAttack ) {
+		super();
 		this.name = _name;
-		
 		this.minLife = _minLife;
 		this.maxLife = _maxLife;
 		this.minAttack = _minAttack;
@@ -34,6 +45,7 @@ public abstract class Player {
 		this.attack = (int)(Math.random()*(this.MAX_ATTACK-this.minAttack) + this.minAttack);
 		this.isAlive = true;
 		weapon = new Weapon();
+		initUI();
 		
 	}
 	
@@ -55,10 +67,10 @@ public abstract class Player {
 	public final int MAX_ATTACK;
 	//Weapon
 	private Weapon weapon;
+	//Image
+	protected Image img;
 	
-	
-	
-	
+		
 	/**
 	 * Return all information in one string
 	 * 
@@ -220,6 +232,30 @@ public abstract class Player {
 		if(w != null) {
 			this.weapon = w;
 		}
+	}
+	
+	private void initUI() {
+		this.setSize(200, 400);
+		this.setPreferredSize(new Dimension(200, 400));
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D) g;
+		if(this.img != null) {
+			g2d.drawImage(img, 0, 0, Color.white, null);
+		}
+		if(this.weapon != null) {
+			if(this.weapon.getImage() != null) {
+				g2d.drawImage(this.weapon.getImage(), 0, 0, null, null);
+			}
+		}
+		
+		g2d.setColor(Color.BLACK);
+		g2d.setFont(new Font( "SansSerif", Font.BOLD, 20 ));
+		g2d.drawString(this.name, 10, 20);
+
 	}
 	
 

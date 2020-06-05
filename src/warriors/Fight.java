@@ -4,13 +4,13 @@ import warriors.player.Player;
 
 public class Fight {
 
-	public Fight(Menu m) {
-		this.menu = m;
+	public Fight(MenuUI menu2) {
+		this.menu = menu2;
 		this.isCurrentFighting = false;
 		this.fightStep = 0;
 	}
 	
-	private Menu menu;
+	private MenuUI menu;
 	private boolean isCurrentFighting;
 	private Player playerFighting;
 	private Ennemy ennemyFighting;

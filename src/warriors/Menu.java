@@ -44,7 +44,7 @@ public class Menu {
 	
 	
 	public String askForString(int minLength) {
-		//Clear al previous lines
+		//Clear all previous lines
 		String userName = "";
 		while(userName.length()<minLength) {
 			userName = this.scan.nextLine();

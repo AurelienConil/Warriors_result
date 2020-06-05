@@ -1,5 +1,8 @@
 package warriors.weapon;
 import warriors.player.Player;
+
+import java.awt.Image;
+
 import warriors.Fight;
 import warriors.board.Case;
 
@@ -21,6 +24,9 @@ public class Weapon implements Case {
 	private String name;
 	private int force;
 	private final int MAX_FORCE;
+	protected Image img;
+	
+	
 	
 	public String getName() {
 		return this.name;
@@ -45,6 +51,10 @@ public class Weapon implements Case {
 	public void interact(Player p, Fight f) {
 		System.out.println("Vous de rencontrer :"+this.toString());
 		
+	}
+	
+	public Image getImage() {
+		return img;
 	}
 	
 }
